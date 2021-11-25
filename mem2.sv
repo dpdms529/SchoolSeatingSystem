@@ -26,7 +26,7 @@ module mem2(input logic clk_mem2,
 	logic [10:0] Time_temp;
 	
 	always_ff @(Time_mem2 or Seat_No_mem2 or write_mem2 or rst_mem2 or Seat_State_mem2, limit_time) begin
-		for (int i=0; i<256; i++) begin
+		for (int i=0; i<32; i++) begin
 			Time_temp <= RAM_DATA1[i] - Time_mem2;
 			if (Time_temp > limit_time && RAM_DATA2[i] === 1) begin
 				RAM_DATA2[i] <= 0;
