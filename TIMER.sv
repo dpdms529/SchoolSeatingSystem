@@ -8,10 +8,10 @@ module TIMER(input logic clk,
    logic [4:0] HOUR_sig;
    logic [5:0] MIN_sig;
 	
-	assign clk_cnt1 = '{0};
-	assign clk_cnt2 = '{6'b0};
-	assign HOUR_sig = '{5'b0};
-	assign MIN_sig = '{6'b0};
+	assign clk_cnt1 = 0;
+	assign clk_cnt2 = 6'b0;
+	assign HOUR_sig = 5'b0;
+	assign MIN_sig = 6'b0;
    
    always @(posedge clk)
       begin
@@ -38,6 +38,6 @@ module TIMER(input logic clk,
          else rst_timer <= 0;
       end
    
-   assign time_out = HOUR_sig  [4:0] & MIN_sig [5:0];
+   assign time_out = HOUR_sig [4:0] & MIN_sig [5:0];
    
 endmodule

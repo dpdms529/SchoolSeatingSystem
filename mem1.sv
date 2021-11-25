@@ -1,7 +1,7 @@
 module mem1(input logic clk_mem1,
 				input logic write_mem1,
 				input logic [24:0] Student_No_mem1,
-				input logic [7:0] Seat_No_mem1);
+				input logic [4:0] Seat_No_mem1);
 				
 	typedef logic [24:0] Student_Num_Table [0:31];
 	Student_Num_Table RAM_DATA = '{ 25'b0, 25'b0, 25'b0, 25'b0, 25'b0, 

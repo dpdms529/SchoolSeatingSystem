@@ -3,7 +3,7 @@ module mem2(input logic clk_mem2,
 				input logic write_mem2,
 				input logic [10:0] Time_mem2,
 				input logic [1:0] Seat_State_mem2,
-				input logic [7:0] Seat_No_mem2,
+				input logic [4:0] Seat_No_mem2,
 				input logic [10:0] limit_time,
 				output logic Do_Not_Seat);
 				

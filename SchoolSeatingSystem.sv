@@ -1,8 +1,8 @@
 module SchoolSeatingSystem(input logic clk,
-                           input logic [24:0] Student_NO,
+                           input logic [24:0] Student_No,
                            input logic [4:0] Seat_No,
                            input logic write,
-                           output logic [10:0] time_out
+                           output logic [10:0] time_out,
                            output logic [1:0] Seat_State);
 
    logic [10:0] setted_reset_time, setted_limit_time, Time;
@@ -11,7 +11,7 @@ module SchoolSeatingSystem(input logic clk,
    assign time_out = Time;
    
    set_up S0(setted_reset_time, setted_limit_time);
-   Timer T0(clk, setted_reset_time, rst_temp, Time);
+   TIMER T0(clk, setted_reset_time, rst_temp, Time);
    mem1 M1(clk, write, Student_No, Seat_No);
    mem2 M2(clk, rst_temp, write, Time, Seat_State, Seat_No, setted_limit_time, Do_Not_Seat_sig);
    
