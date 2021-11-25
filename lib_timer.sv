@@ -2,10 +2,15 @@ module lib_timer(input logic clk,
                   input logic [10:0] reset_time,
                   output logic rst_timer,
                   output logic [10:0] time_out);
-   logic clk_cnt1 = 0; // 1'b0?
-   logic [5:0] clk_cnt2 = 6'bb000000;
-   logic [4:0] HOUR_sig = 5'b00000;
-   logic [5:0] MIN_sig = 6'b000000;
+   logic clk_cnt1; // 1'b0?
+   logic [5:0] clk_cnt2;
+   logic [4:0] HOUR_sig;
+   logic [5:0] MIN_sig;
+	
+	assign clk_cnt1 = 0;
+	assign [5:0] clk_cnt2= 6'b000000;
+	assign [4:0] HOUR_sig = 5'b00000;
+	assign [5:0] MIN_sig = 6'b000000
    
    always @(posedge clk)
       begin
