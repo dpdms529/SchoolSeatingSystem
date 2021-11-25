@@ -3,17 +3,12 @@ module TIMER(input logic clk,
                   output logic rst_timer,
                   output logic [10:0] time_out);
 
-   logic clk_cnt1; // 1'b0?
-   logic [5:0] clk_cnt2;
-   logic [4:0] HOUR_sig;
-   logic [5:0] MIN_sig;
-	
-	assign clk_cnt1 = 0;
-	assign clk_cnt2 = 6'b0;
-	assign HOUR_sig = 5'b0;
-	assign MIN_sig = 6'b0;
+   logic clk_cnt1 = 0; // 1'b0?
+   logic [5:0] clk_cnt2 = 6'b0;
+   logic [4:0] HOUR_sig = 5'b0;
+   logic [5:0] MIN_sig = 6'b0;
    
-   always @(posedge clk)
+   always_ff @(posedge clk)
       begin
          if (clk) clk_cnt1 <= ~clk_cnt1;
          if (clk_cnt1 == 1)

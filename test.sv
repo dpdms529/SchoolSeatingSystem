@@ -1,11 +1,12 @@
 module test();
-	logic clk_tb, write_tb;
-	logic [24:0] Student_No_tb;
-	logic [4:0] Seat_No_tb;
-	logic [1:0] Seat_State_tb;
-	logic [10:0] Time;
+	logic clk_tb = 0;
+	logic write_tb = 0;
+	logic [24:0] Student_No_tb = 25'b0;
+	logic [4:0] Seat_No_tb = 5'b0;
+	logic [1:0] Seat_State_tb = 2'b0;
+	logic [10:0] Time = 11'b0;
 	
-	SchoolSeatingSystem C0(clk_tb, Time, Student_No_tb, Seat_No_tb, write_tb, Seat_State_tb);
+	SchoolSeatingSystem C0(clk_tb, Student_No_tb, Seat_No_tb, write_tb, Time, Seat_State_tb);
 	
 	initial begin
 		clk_tb <= ~clk_tb; #5;
