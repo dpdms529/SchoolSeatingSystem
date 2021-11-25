@@ -1,4 +1,4 @@
-module lib_timer(input logic clk,
+module TIMER(input logic clk,
                   input logic [10:0] reset_time,
                   output logic rst_timer,
                   output logic [10:0] time_out);
@@ -8,9 +8,9 @@ module lib_timer(input logic clk,
    logic [5:0] MIN_sig;
 	
 	assign clk_cnt1 = 0;
-	assign [5:0] clk_cnt2= 6'b000000;
-	assign [4:0] HOUR_sig = 5'b00000;
-	assign [5:0] MIN_sig = 6'b000000
+	assign clk_cnt2= 6'b000000;
+	assign HOUR_sig = 5'b00000;
+	assign MIN_sig = 6'b000000;
    
    always @(posedge clk)
       begin
