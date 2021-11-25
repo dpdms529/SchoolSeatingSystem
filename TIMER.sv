@@ -1,4 +1,4 @@
-module lib_timer(input logic clk,
+module TIMER(input logic clk,
                   input logic [10:0] reset_time,
                   output logic rst_timer,
                   output logic [10:0] time_out);
