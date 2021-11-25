@@ -13,7 +13,7 @@ module mem1(input logic clk_mem1,
 							32'b0, 32'b0};
 	
 	always_ff @(Student_No_mem1 or Seat_No_mem1 or write_mem1) begin
-		if(write_mem1 === 1) begin
+		if (write_mem1 === 1) begin
 			RAM_DATA[Seat_No_mem1] <= Student_No_mem1;	// 입력받은 자리에 학번을 할당
 		end
 	end
