@@ -3,35 +3,26 @@ module TIMER(input logic clk,
              output logic rst_timer,
              output logic [10:0] time_out);
 
-   logic clk_cnt1 = 0;
-   logic [5:0] clk_cnt2 = 6'b0;
-   logic [4:0] HOUR_sig = 5'b0;
-   logic [5:0] MIN_sig = 6'b0;
+   logic [4:0] HOUR_sig = 0;
+   logic [5:0] MIN_sig = -1;
    
    always_ff @(posedge clk)
 		begin
 			if (clk) 
 				begin
-					clk_cnt1 <= ~clk_cnt1;
-					if (clk_cnt1 === 1)
+					MIN_sig <= MIN_sig + 1;
+					if (MIN_sig === 60) 
 						begin
-							clk_cnt1 <= 0;
-							clk_cnt2 <= clk_cnt2 + 1;
-							MIN_sig <= MIN_sig + 1;
-							if (MIN_sig === 6'b111100) MIN_sig <= 6'b000000;
-						end
-					else if (clk_cnt2 === 6'b111100)
-						begin
-							clk_cnt2 <= 6'b000000;
+							MIN_sig <= 0;
 							HOUR_sig <= HOUR_sig + 1;
-							if(HOUR_sig === 5'b11000) HOUR_sig <= 5'b00000;
+							if(HOUR_sig === 24) HOUR_sig <= 0;
 						end
 				end
 		end
 		
 	always @(reset_time)
 		begin
-			if(reset_time === HOUR_sig) rst_timer <= 1;
+			if(reset_time === HOUR_sig) rst_timer <= 1;	//day end -> reset signal
 			else rst_timer <= 0;
 		end
    

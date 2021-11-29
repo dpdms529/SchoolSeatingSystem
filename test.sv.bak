@@ -11,34 +11,26 @@ module test();
 	always #5 clk_tb <= ~clk_tb;
 	
 	initial begin
-		
+		#40 write_tb <= 1;
 		#10; 
-		write_tb <= 1;
-		Student_No_tb <= 201819186;
+		Student_No_tb <= 32'b1111111111111111111111111;
 		Seat_No_tb <= 5'b00001;
 		Seat_State_tb <= 2'b11;
-		#5 write_tb <= 0;
 		
 		#40;
-		write_tb <= 1;
-		Student_No_tb <= 201912352;
+		Student_No_tb <= 32'b1111011000001000011110011;
 		Seat_No_tb <= 5'b00010;
 		Seat_State_tb <= 2'b11;
-		#5 write_tb <= 0;
 		
 		#70;
-		write_tb <= 1;
-		Student_No_tb <= 201918757;
+		Student_No_tb <= 32'b1111001111100111111001111;
 		Seat_No_tb <= 5'b00101;
 		Seat_State_tb <= 2'b11;
-		#5 write_tb <= 0;
 		
 		#80 
-		write_tb <= 1;
-		Student_No_tb <= 201912379;
+		Student_No_tb <= 32'b1111111111111111111111111;
 		Seat_No_tb <= 5'b00001; 
 		Seat_State_tb <= 2'b01;
-		#5 write_tb <= 0;
 
 		$stop;
 	end	
