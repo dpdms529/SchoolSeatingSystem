@@ -3,7 +3,7 @@ module SchoolSeatingSystem(input logic clk,
                            input logic [4:0] Seat_No,
                            input logic write,
                            output logic [10:0] time_out,
-                           output logic [1:0] Seat_State);
+                           input logic [1:0] Seat_State);
 
    logic [10:0] setted_reset_time, setted_limit_time, Time;
    logic rst_temp, Do_Not_Seat_sig;

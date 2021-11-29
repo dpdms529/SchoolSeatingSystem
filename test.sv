@@ -12,20 +12,27 @@ module test();
 	
 	initial begin
 		#40 write_tb <= 1;
-		#10 Student_No_tb <= 25'b1111111111111111111111111;
-		#40 Student_No_tb <= 25'b1111011000001000011110011;
-		#70 Student_No_tb <= 25'b1111001111100111111001111;
-		#80 Student_No_tb <= 25'b1111111111111111111111111;
+		#10; 
+		Student_No_tb <= 25'b1111111111111111111111111;
+		Seat_No_tb <= 5'b00001;
+		Seat_State_tb <= 2'b11;
 		
-		#10 Seat_No_tb <= 5'b00001;
-		#40 Seat_No_tb <= 5'b00010;
-		#70 Seat_No_tb <= 5'b00101;
-		#80 Seat_No_tb <= 5'b00001; 
+		#40;
+		Student_No_tb <= 25'b1111011000001000011110011;
+		Seat_No_tb <= 5'b00010;
+		Seat_State_tb <= 2'b11;
 		
-		#10 Seat_State_tb <= 2'b11;
-		#40 Seat_State_tb <= 2'b11;
-		#70 Seat_State_tb <= 2'b11;
-		#80 Seat_State_tb <= 2'b01;
+		#70;
+		Student_No_tb <= 25'b1111001111100111111001111;
+		Seat_No_tb <= 5'b00101;
+		Seat_State_tb <= 2'b11;
+		
+		#80 
+		Student_No_tb <= 25'b1111111111111111111111111;
+		Seat_No_tb <= 5'b00001; 
+		Seat_State_tb <= 2'b01;
+
+		$stop;
 	end	
 		
 	
