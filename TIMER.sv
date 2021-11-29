@@ -3,7 +3,7 @@ module TIMER(input logic clk,
              output logic rst_timer,
              output logic [10:0] time_out);
 
-   logic clk_cnt1 = 0; // 1'b0?
+   logic clk_cnt1 = 0;
    logic [5:0] clk_cnt2 = 6'b0;
    logic [4:0] HOUR_sig = 5'b0;
    logic [5:0] MIN_sig = 6'b0;
@@ -31,9 +31,6 @@ module TIMER(input logic clk,
 		
 	always @(reset_time)
 		begin
-			$display("reset_time : %b",reset_time);
-			$display("HOUR_sig : %b", HOUR_sig);
-			$display("isSame : %b", reset_time === HOUR_sig);
 			if(reset_time === HOUR_sig) rst_timer <= 1;
 			else rst_timer <= 0;
 		end

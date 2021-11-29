@@ -1,5 +1,5 @@
 module SchoolSeatingSystem(input logic clk,
-                           input logic [24:0] Student_No,
+                           input logic [31:0] Student_No,
                            input logic [4:0] Seat_No,
                            input logic write,
                            output logic [10:0] time_out,
