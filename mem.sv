@@ -1,11 +1,20 @@
-module mem2(input logic clk_mem2,
-				input logic rst_mem2,
-				input logic write_mem2,
-				input logic [10:0] Time_mem2,
-				input logic [1:0] Seat_State_mem2,
-				input logic [4:0] Seat_No_mem2,
+module mem(input logic rst_mem,
+				input logic write_mem,
+				input logic [31:0] Student_No_mem,
+				input logic [10:0] Time_mem,
+				input logic [1:0] Seat_State_mem,
+				input logic [4:0] Seat_No_mem,
 				input logic [10:0] limit_time,
 				output logic Do_Not_Seat);
+				
+	typedef logic [31:0] Student_Num_Table [0:31];
+	Student_Num_Table RAM_DATA = '{ 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0};
 				
 	typedef logic [10:0] Time_Table [0:31];
 	Time_Table RAM_DATA1 = '{ 11'b0, 11'b0, 11'b0, 11'b0, 11'b0, 
@@ -25,18 +34,16 @@ module mem2(input logic clk_mem2,
 											2'b0, 2'b0};
 	logic [10:0] Time_temp;
 	
-	always_ff @(Time_mem2, Seat_No_mem2, write_mem2, rst_mem2, Seat_State_mem2, limit_time) begin
+	always_latch begin
 		for (int i=0; i<32; i++) begin
-			Time_temp <= RAM_DATA1[i] - Time_mem2;
-			if (Time_temp > limit_time && RAM_DATA2[i] === 2'b01) begin
-				RAM_DATA2[i] <= 2'b0;
-			end
-		end
-		if (RAM_DATA2[Seat_No_mem2] === 3 && Seat_State_mem2 === 3) begin
-			Do_Not_Seat <= 1;
+			Time_temp <= RAM_DATA1[i] - Time_mem;
+			if (Time_temp > limit_time && RAM_DATA2[i] === 1) RAM_DATA2[i] <= 0;
 		end
 		
-		if (rst_mem2 === 1) begin
+		if (RAM_DATA2[Seat_No_mem] === 3 && Seat_State_mem === 3) Do_Not_Seat <= 1;
+		else Do_Not_Seat <= 0;
+		
+		if (rst_mem === 1) begin
 			RAM_DATA2 <= '{ 2'b0, 2'b0, 2'b0, 2'b0, 2'b0, 
 								2'b0, 2'b0, 2'b0, 2'b0, 2'b0,
 								2'b0, 2'b0, 2'b0, 2'b0, 2'b0,
@@ -46,9 +53,10 @@ module mem2(input logic clk_mem2,
 								2'b0, 2'b0};
 		end
 		
-		if (write_mem2 === 1) begin
-			RAM_DATA1[Seat_No_mem2] <= Time_mem2;
-			RAM_DATA2[Seat_No_mem2] <= Seat_State_mem2;
+		if (write_mem === 1 && Do_Not_Seat !== 1) begin
+			RAM_DATA[Seat_No_mem] <= Student_No_mem;
+			RAM_DATA1[Seat_No_mem] <= Time_mem;
+			RAM_DATA2[Seat_No_mem] <= Seat_State_mem;
 		end
 			
 	end
