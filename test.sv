@@ -15,30 +15,39 @@ module test();
 		#10; 
 		write_tb <= 1;
 		Student_No_tb <= 201819186;
-		Seat_No_tb <= 5'b00001;
-		Seat_State_tb <= 2'b11;
+		Seat_No_tb <= 1;
+		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#40;
+		#20;
 		write_tb <= 1;
 		Student_No_tb <= 201912352;
-		Seat_No_tb <= 5'b00010;
-		Seat_State_tb <= 2'b11;
+		Seat_No_tb <= 2;
+		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#70;
+		#10;
+		write_tb <= 1;
+		Student_No_tb <= 201912352;
+		Seat_No_tb <= 2;
+		Seat_State_tb <= 1;
+		#5 write_tb <= 0;
+		
+		#20;
 		write_tb <= 1;
 		Student_No_tb <= 201918757;
-		Seat_No_tb <= 5'b00101;
-		Seat_State_tb <= 2'b11;
+		Seat_No_tb <= 5;
+		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#80 
+		#10 
 		write_tb <= 1;
-		Student_No_tb <= 201912379;
+		Student_No_tb <= 2019123179;
 		Seat_No_tb <= 5'b00001; 
-		Seat_State_tb <= 2'b01;
+		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
+		
+		#60
 
 		$stop;
 	end	

@@ -12,7 +12,6 @@ module SchoolSeatingSystem(input logic clk,
    
    set_up S0(setted_reset_time, setted_limit_time);
    TIMER T0(clk, setted_reset_time, rst_temp, Time);
-//   mem1 M1(write, Student_No, Seat_No);
    mem M0(rst_temp, write, Student_No, Time, Seat_State, Seat_No, setted_limit_time, Do_Not_Seat_sig);
 	
    

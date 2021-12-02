@@ -32,18 +32,34 @@ module mem(input logic rst_mem,
 											2'b0, 2'b0, 2'b0, 2'b0, 2'b0,
 											2'b0, 2'b0, 2'b0, 2'b0, 2'b0,
 											2'b0, 2'b0};
-	logic [10:0] Time_temp;
+	logic [10:0] Time_temp = 0;
 	
-	always_latch begin
+	always_comb begin
 		for (int i=0; i<32; i++) begin
-			Time_temp <= RAM_DATA1[i] - Time_mem;
-			if (Time_temp > limit_time && RAM_DATA2[i] === 1) RAM_DATA2[i] <= 0;
+			Time_temp <= Time_mem-RAM_DATA1[i];
+			if (RAM_DATA2[i] === 1 && Time_temp > limit_time) RAM_DATA2[i] <= 0;
 		end
 		
-		if (RAM_DATA2[Seat_No_mem] === 3 && Seat_State_mem === 3) Do_Not_Seat <= 1;
-		else Do_Not_Seat <= 0;
+		if (RAM_DATA2[Seat_No_mem] === 2 && Seat_State_mem === 2) Do_Not_Seat = 1;
+		else Do_Not_Seat = 0;
 		
 		if (rst_mem === 1) begin
+			RAM_DATA <= '{ 32'b0, 32'b0, 32'b0, 32'b0, 32'b0, 
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0, 32'b0, 32'b0, 32'b0,
+							32'b0, 32'b0};
+							
+			RAM_DATA <= '{ 11'b0, 11'b0, 11'b0, 11'b0, 11'b0, 
+								11'b0, 11'b0, 11'b0, 11'b0, 11'b0,
+								11'b0, 11'b0, 11'b0, 11'b0, 11'b0,
+								11'b0, 11'b0, 11'b0, 11'b0, 11'b0,
+								11'b0, 11'b0, 11'b0, 11'b0, 11'b0,
+								11'b0, 11'b0, 11'b0, 11'b0, 11'b0,
+								11'b0, 11'b0};
+		
 			RAM_DATA2 <= '{ 2'b0, 2'b0, 2'b0, 2'b0, 2'b0, 
 								2'b0, 2'b0, 2'b0, 2'b0, 2'b0,
 								2'b0, 2'b0, 2'b0, 2'b0, 2'b0,
