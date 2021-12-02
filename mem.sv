@@ -36,8 +36,12 @@ module mem(input logic rst_mem,
 	
 	always_comb begin
 		for (int i=0; i<32; i++) begin
-			Time_temp <= Time_mem-RAM_DATA1[i];
-			if (RAM_DATA2[i] === 1 && Time_temp > limit_time) RAM_DATA2[i] <= 0;
+			Time_temp = Time_mem-RAM_DATA1[i];
+			if (RAM_DATA2[i] === 1 && Time_temp > limit_time) begin
+				RAM_DATA[i] <= 0;
+				RAM_DATA1[i] <= 0;
+				RAM_DATA2[i] <= 0;
+			end
 		end
 		
 		if (RAM_DATA2[Seat_No_mem] === 2 && Seat_State_mem === 2) Do_Not_Seat = 1;

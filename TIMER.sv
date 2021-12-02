@@ -9,7 +9,7 @@ module TIMER(input logic clk,
 		begin
 			if (clk) 
 				begin
-					MIN_sig <= MIN_sig + 1;
+					MIN_sig = MIN_sig + 1;
 					if(reset_time === MIN_sig) begin
 						MIN_sig <= 0;
 						rst_timer <= 1;	//day end -> reset signal

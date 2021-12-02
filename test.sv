@@ -47,7 +47,7 @@ module test();
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#60
+		#100
 
 		$stop;
 	end	
