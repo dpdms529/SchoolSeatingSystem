@@ -8,7 +8,7 @@ module SchoolSeatingSystem(input logic clk,
 									input logic [10:0] limit_time,
 									input logic [1:0] ban);
 
-   logic [10:0] setted_reset_time = 1440, Time;
+   logic [10:0] setted_reset_time = 1080, Time;
    logic rst_temp;
    
    assign time_out = Time;
