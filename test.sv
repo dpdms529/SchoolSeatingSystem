@@ -1,12 +1,15 @@
 module test();
 	logic clk_tb = 1;
 	logic write_tb = 0;
-	logic [31:0] Student_No_tb = 32'b0;
-	logic [4:0] Seat_No_tb = 5'b0;
-	logic [1:0] Seat_State_tb = 2'b0;
-	logic [10:0] Time = 11'b0;
+	logic [31:0] Student_No_tb = 0;
+	logic [4:0] Seat_No_tb = 0;
+	logic [1:0] Seat_State_tb = 0;
+	logic [10:0] Time_tb = 0;
+	logic [1:0] write_set_tb = 0;
+	logic [10:0] limit_time_tb = 10;
+	logic [1:0] ban_tb = 2;
 	
-	SchoolSeatingSystem C0(clk_tb, Student_No_tb, Seat_No_tb, write_tb, Time, Seat_State_tb);
+	SchoolSeatingSystem C0(clk_tb, Student_No_tb, Seat_No_tb, write_tb, Time_tb, Seat_State_tb, write_set_tb, limit_time_tb, ban_tb);
 	
 	always #5 clk_tb <= ~clk_tb;
 	
@@ -33,6 +36,16 @@ module test();
 		Seat_State_tb <= 1;
 		#5 write_tb <= 0;
 		
+		#5;
+		write_set_tb <= 1;
+		ban_tb = 0;
+		#5 write_set_tb <= 0;
+		
+		#5;
+		write_set_tb <= 2;
+		limit_time_tb = 15;
+		#5 write_set_tb <= 0;
+		
 		#20;
 		write_tb <= 1;
 		Student_No_tb <= 201918757;
@@ -58,6 +71,13 @@ module test();
 		write_tb <= 1;
 		Student_No_tb <= 201912379;
 		Seat_No_tb <= 1; 
+		Seat_State_tb <= 2;
+		#5 write_tb <= 0;
+		
+		#10 
+		write_tb <= 1;
+		Student_No_tb <= 201912379;
+		Seat_No_tb <= 4; 
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
