@@ -1,5 +1,5 @@
 module test();
-	logic clk_tb = 0;
+	logic clk_tb = 1;
 	logic write_tb = 0;
 	logic [31:0] Student_No_tb = 32'b0;
 	logic [4:0] Seat_No_tb = 5'b0;
@@ -40,15 +40,36 @@ module test();
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#10 
+		#10;
 		write_tb <= 1;
-		Student_No_tb <= 2019123179;
-		Seat_No_tb <= 5'b00001; 
+		Student_No_tb <= 201918757;
+		Seat_No_tb <= 5;
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#100
-
+		#10;
+		write_tb <= 1;
+		Student_No_tb <= 201918757;
+		Seat_No_tb <= 3;
+		Seat_State_tb <= 2;
+		#5 write_tb <= 0;
+		
+		#10 
+		write_tb <= 1;
+		Student_No_tb <= 201912379;
+		Seat_No_tb <= 1; 
+		Seat_State_tb <= 2;
+		#5 write_tb <= 0;
+		
+		#10; 
+		write_tb <= 1;
+		Student_No_tb <= 201819186;
+		Seat_No_tb <= 1;
+		Seat_State_tb <= 0;
+		#5 write_tb <= 0;
+		
+		#14400;
+		
 		$stop;
 	end	
 		

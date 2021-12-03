@@ -3,7 +3,7 @@ module TIMER(input logic clk,
              output logic rst_timer,
              output logic [10:0] time_out);
 
-   logic [10:0] MIN_sig = 0;
+   logic [10:0] MIN_sig = -1;
    
    always_ff @(posedge clk)
 		begin
@@ -13,19 +13,11 @@ module TIMER(input logic clk,
 					if(reset_time === MIN_sig) begin
 						MIN_sig <= 0;
 						rst_timer <= 1;	//day end -> reset signal
+						$strobe("[%d]date changed",MIN_sig);
 					end
 					else rst_timer <= 0;
 				end
 		end
-		
-//	always @(MIN_sig)
-//		begin
-//			if(reset_time === MIN_sig) begin
-//				MIN_sig <= 0;
-//				rst_timer <= 1;	//day end -> reset signal
-//			end
-//			else rst_timer <= 0;
-//		end
    
    assign time_out = MIN_sig;
    
