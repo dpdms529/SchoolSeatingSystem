@@ -4,7 +4,7 @@ module TIMER(input logic clk,
              output logic [10:0] time_out);
 
    logic [10:0] MIN_sig = -1;
-   
+	
    always_ff @(posedge clk)
 		begin
 			if (clk) 
@@ -13,9 +13,9 @@ module TIMER(input logic clk,
 					if(reset_time === MIN_sig) begin
 						MIN_sig <= 0;
 						rst_timer <= 1;	//day end -> reset signal
-						$strobe("[%d]date changed",MIN_sig);
+						$strobe("[%2d:%2d] date changed",MIN_sig/60,MIN_sig%60);
 					end
-					else rst_timer <= 0;
+					else if(MIN_sig === 360)rst_timer <= 0;
 				end
 		end
    

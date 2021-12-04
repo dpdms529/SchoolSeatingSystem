@@ -37,7 +37,7 @@ module MEMORY(input logic rst_mem,
 			
 	always_comb begin
 		if(write_set_mem === 1 && ban_mem !== 2) begin
-			$strobe("[%d]manager set banned state -> %d", Time_mem, ban_mem);
+			$strobe("[%2d:%2d] manager set banned state -> %d", Time_mem/60, Time_mem%60, ban_mem);
 			for(int i = 0;i<32;i++) begin
 				if(i%2 === ban_mem) begin 
 					Seat_State_Table[i] <= 3;
@@ -47,19 +47,19 @@ module MEMORY(input logic rst_mem,
 			end
 		end
 		else if(write_set_mem === 1) begin
-			$strobe("[%d]manager set banned state -> %d", Time_mem, ban_mem);
+			$strobe("[%2d:%2d] manager set banned state -> %d", Time_mem/60, Time_mem%60, ban_mem);
 			for(int i = 0;i<32;i++) begin
 				if(Seat_State_Table[i] === 3) begin 
 					Seat_State_Table[i] <= 0;
 				end
 			end			
 		end
-		if(write_set_mem === 2) $strobe("[%d]manager set limit_time -> %d", Time_mem, limit_time_mem);			
+		if(write_set_mem === 2) $strobe("[%2d:%2d] manager set limit_time -> %d", Time_mem/60, Time_mem%60, limit_time_mem);			
 	
 		for (int i=0; i<32; i++) begin
 			Time_temp = Time_mem - Time_Table[i];
 			if (Seat_State_Table[i] === 1 && Time_temp >= limit_time_mem) begin
-				$strobe("[%d]%d : seat[%d] returned", Time_mem,Student_Num_Table[i], i);
+				$strobe("[%2d:%2d]%d : seat[%2d] returned", Time_mem/60, Time_mem%60,Student_Num_Table[i], i);
 				Student_Num_Table[i] <= 0;
 				Time_Table[i] <= 0;
 				Seat_State_Table[i] <= 0;
@@ -89,17 +89,26 @@ module MEMORY(input logic rst_mem,
 					else Seat_State_Table[i] <= 0;
 				end
 			end
+			else begin 
+				Seat_State_Table <= '{0, 0, 0, 0, 0, 
+											0, 0, 0, 0, 0,
+											0, 0, 0, 0, 0,
+											0, 0, 0, 0, 0,
+											0, 0, 0, 0, 0,
+											0, 0, 0, 0, 0,
+											0, 0};
+			end
 								
 		end
 		
-		if (write_mem === 1 && Seat_State_mem !== Seat_State_Table[Seat_No_mem] && ((Student_Num_Table[Seat_No_mem] === Student_No_mem) || Student_Num_Table[Seat_No_mem] === 0)) begin : writeBlock
+		if (rst_mem === 0 && write_mem === 1 && Seat_State_mem !== Seat_State_Table[Seat_No_mem] && ((Student_Num_Table[Seat_No_mem] === Student_No_mem) || (Student_Num_Table[Seat_No_mem] === 0))) begin : writeBlock
 			if(Seat_State_Table[Seat_No_mem] === 3) begin
-				$strobe("[%d]%d : manager banned this seat[%d]", Time_mem, Student_No_mem, Seat_No_mem);
+				$strobe("[%2d:%2d]%d : manager banned this seat[%d]", Time_mem/60, Time_mem%60, Student_No_mem, Seat_No_mem);
 				disable writeBlock;
 			end
 			for(int i = 0;i<32;i++)begin
 				if(Student_Num_Table[i] === Student_No_mem && i !== Seat_No_mem) begin
-					$strobe("[%d]%d : can't access other seat[%d]", Time_mem, Student_No_mem, Seat_No_mem);
+					$strobe("[%2d:%2d]%d : can't access other seat[%d]", Time_mem/60, Time_mem%60, Student_No_mem, Seat_No_mem);
 					disable writeBlock;
 				end
 			end
@@ -107,16 +116,16 @@ module MEMORY(input logic rst_mem,
 				Student_Num_Table[Seat_No_mem] <= 0;
 				Time_Table[Seat_No_mem] <= 0;
 				Seat_State_Table[Seat_No_mem] <= 0;
-				$strobe("[%d]%d : checked out seat[%d]", Time_mem, Student_No_mem, Seat_No_mem);
+				$strobe("[%2d:%2d]%d : checked out seat[%d]", Time_mem/60, Time_mem%60, Student_No_mem, Seat_No_mem);
 			end
 			else if(!(Seat_State_mem === 1 && Seat_State_Table[Seat_No_mem] === 0)) begin
 				Student_Num_Table[Seat_No_mem] <= Student_No_mem;
 				Time_Table[Seat_No_mem] <= Time_mem;
 				Seat_State_Table[Seat_No_mem] <= Seat_State_mem;
-				$strobe("[%d]%d : seat[%d] state changed (%d)", Time_mem, Student_No_mem,Seat_No_mem,Seat_State_mem);
+				$strobe("[%2d:%2d]%d : seat[%d] state changed (%d)", Time_mem/60, Time_mem%60, Student_No_mem,Seat_No_mem,Seat_State_mem);
 			end
 		end
-		else if(write_mem ===1) $strobe("[%d]%d : access denied seat[%d]", Time_mem, Student_No_mem, Seat_No_mem);
+		else if(write_mem === 1) $strobe("[%2d:%2d]%d : access denied seat[%d]", Time_mem/60, Time_mem%60, Student_No_mem, Seat_No_mem);
 			
 	end
 	

@@ -15,7 +15,7 @@ module test();
 	
 	initial begin
 		
-		#10; 
+		#3610; 
 		write_tb <= 1;
 		Student_No_tb <= 201819186;
 		Seat_No_tb <= 1;
@@ -53,7 +53,8 @@ module test();
 		#5;
 		write_set_tb <= 2;
 		limit_time_tb = 15;
-		#5 write_set_tb <= 0;
+		#5;
+		write_set_tb <= 0;
 		
 		#15;
 		write_tb <= 1;
@@ -72,32 +73,32 @@ module test();
 		#5;
 		write_tb <= 1;
 		Student_No_tb <= 201918757;
-		Seat_No_tb <= 5;
-		Seat_State_tb <= 1;
+		Seat_No_tb <= 3;
+		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
 		#5;
 		write_tb <= 1;
 		Student_No_tb <= 201918757;
-		Seat_No_tb <= 3;
-		Seat_State_tb <= 2;
+		Seat_No_tb <= 5;
+		Seat_State_tb <= 1;
 		#5 write_tb <= 0;
 		
-		#5 
+		#5; 
 		write_tb <= 1;
 		Student_No_tb <= 201912379;
 		Seat_No_tb <= 1; 
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#5 
+		#5; 
 		write_tb <= 1;
 		Student_No_tb <= 201912379;
 		Seat_No_tb <= 4; 
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#5 
+		#5; 
 		write_tb <= 1;
 		Student_No_tb <= 201912379;
 		Seat_No_tb <= 7; 
@@ -111,24 +112,36 @@ module test();
 		Seat_State_tb <= 0;
 		#5 write_tb <= 0;
 		
-		#10585;
+		#10580;
+		
+		#5;
 		write_set_tb <= 1;
 		ban_tb = 1;
 		#5 write_set_tb <= 0;
 		
-		#5 
-		write_tb <= 1;
-		Student_No_tb <= 201912379;
-		Seat_No_tb <= 7; 
-		Seat_State_tb <= 2;
-		#5 write_tb <= 0;
-		
-		#5 
+		#5;
 		write_tb <= 1;
 		Student_No_tb <= 201912379;
 		Seat_No_tb <= 6; 
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
+		
+		#3590;
+	
+		#5;
+		write_tb <= 1;
+		Student_No_tb <= 201912379;
+		Seat_No_tb <= 6; 
+		Seat_State_tb <= 2;
+		#5 write_tb <= 0;
+		
+		#5;
+		write_tb <= 1;
+		Student_No_tb <= 201819186;
+		Seat_No_tb <= 3; 
+		Seat_State_tb <= 2;
+		#5 write_tb <= 0;
+		
 		
 		$stop;
 	end	
