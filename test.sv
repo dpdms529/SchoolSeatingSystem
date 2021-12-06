@@ -126,7 +126,14 @@ module test();
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#3580;
+		#3570;
+		
+		#5;
+		write_tb <= 1;
+		Student_No_tb <= 201912379;
+		Seat_No_tb <= 6; 
+		Seat_State_tb <= 2;
+		#5 write_tb <= 0;
 	
 		#5;
 		write_tb <= 1;

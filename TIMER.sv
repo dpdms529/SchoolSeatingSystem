@@ -15,7 +15,7 @@ module TIMER(input logic clk,
 						rst_timer <= 1;	//day end -> reset signal
 						$strobe("[%2d:%2d] date changed",MIN_sig/60,MIN_sig%60);
 					end
-					else if(MIN_sig === 360)rst_timer <= 0;
+					else if(MIN_sig === 359)rst_timer <= 0;
 				end
 		end
    
