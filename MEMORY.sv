@@ -102,6 +102,7 @@ module MEMORY(input logic rst_mem,
 		end
 		
 		if (rst_mem === 0 && write_mem === 1 && Seat_State_mem !== Seat_State_Table[Seat_No_mem] && ((Student_Num_Table[Seat_No_mem] === Student_No_mem) || (Student_Num_Table[Seat_No_mem] === 0))) begin : writeBlock
+//			$strobe("%d %d %d %d %d", rst_mem===0, write_mem===0, (Seat_State_mem !== Seat_State_Table[Seat_No_mem]), (Student_Num_Table[Seat_No_mem] === Student_No_mem), (Student_Num_Table[Seat_No_mem] === 0));
 			if(Seat_State_Table[Seat_No_mem] === 3) begin
 				$strobe("[%2d:%2d]%d : manager banned this seat[%d]", Time_mem/60, Time_mem%60, Student_No_mem, Seat_No_mem);
 				disable writeBlock;
@@ -125,8 +126,11 @@ module MEMORY(input logic rst_mem,
 				$strobe("[%2d:%2d]%d : seat[%d] state changed (%d)", Time_mem/60, Time_mem%60, Student_No_mem,Seat_No_mem,Seat_State_mem);
 			end
 		end
-		else if(write_mem === 1) $strobe("[%2d:%2d]%d : access denied seat[%d]", Time_mem/60, Time_mem%60, Student_No_mem, Seat_No_mem);
-			
+		else if(rst_mem === 0 && write_mem === 1 && (Seat_State_mem === Seat_State_Table[Seat_No_mem])) begin
+			$strobe("[%2d:%2d]%d : access denied seat[%d]", Time_mem/60, Time_mem%60, Student_No_mem, Seat_No_mem);
+		end
+		else if (rst_mem === 1 && write_mem === 1) $strobe("[%2d:%2d]%d : open at 6 a.m.", Time_mem/60, Time_mem%60);
+		
 	end
 	
 endmodule

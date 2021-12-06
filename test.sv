@@ -15,7 +15,7 @@ module test();
 	
 	initial begin
 		
-		#3610; 
+		#3600; 
 		write_tb <= 1;
 		Student_No_tb <= 201819186;
 		Seat_No_tb <= 1;
@@ -112,7 +112,7 @@ module test();
 		Seat_State_tb <= 0;
 		#5 write_tb <= 0;
 		
-		#10580;
+		#10590;
 		
 		#5;
 		write_set_tb <= 1;
@@ -126,7 +126,7 @@ module test();
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
 		
-		#3590;
+		#3580;
 	
 		#5;
 		write_tb <= 1;
@@ -141,7 +141,6 @@ module test();
 		Seat_No_tb <= 3; 
 		Seat_State_tb <= 2;
 		#5 write_tb <= 0;
-		
 		
 		$stop;
 	end	
